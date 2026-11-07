@@ -3,6 +3,16 @@
 <head>
 <meta charset="utf-8">
 <title>Buquê de flores para Yasmin ❤️</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#07070a">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Buquê">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400;1,600&family=Great+Vibes&display=swap" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <style>
   :root{ --bg:#07070a; --fg:#d6e4ff; box-sizing:border-box;
@@ -16,18 +26,31 @@
   #replay:hover{opacity:1;background:rgba(255,217,230,.12);}
 
   /* ===== TEXTOS NOS CANTOS (edite a aparência aqui) ===== */
-  .texto{position:fixed;z-index:2;color:var(--fg);font-family:Georgia,serif;line-height:1.7;
-    text-shadow:0 0 12px rgba(0,0,0,.9),0 0 3px rgba(0,0,0,.9);pointer-events:none;
-    opacity:0;transition:opacity 2.5s ease;}
-  .texto.show{opacity:1}
+  .texto{position:fixed;z-index:2;color:#eaf1ff;font-family:'Cormorant Garamond',Georgia,serif;
+    line-height:1.55;pointer-events:none;
+    text-shadow:0 0 18px rgba(120,160,255,.45),0 0 4px rgba(0,0,0,.9);}
+  .texto .linha{display:block;opacity:0;transform:translateY(10px);filter:blur(4px);
+    transition:opacity 1.8s ease,transform 1.8s ease,filter 1.8s ease;transition-delay:calc(var(--i)*.55s);}
+  .texto.show .linha{opacity:1;transform:none;filter:none;}
   #texto-esq{left:clamp(14px,3vw,48px);top:calc(clamp(14px,4vh,48px) + env(safe-area-inset-top,0px));
-    max-width:26vw;text-align:left;font-size:clamp(13px,1.5vw,20px);font-style:italic;}
+    max-width:30vw;text-align:left;font-family:'Great Vibes','Cormorant Garamond',Georgia,cursive;
+    font-size:clamp(22px,2.6vw,40px);line-height:1.4;color:#ffe9f0;
+    text-shadow:0 0 22px rgba(255,150,190,.55),0 0 4px rgba(0,0,0,.9);}
+  #texto-esq .ornamento{font-family:'Cormorant Garamond',Georgia,serif;font-size:.5em;letter-spacing:.4em;
+    color:#ff9db5;opacity:.85;margin-bottom:.4em;}
   #texto-dir{right:clamp(14px,3vw,48px);bottom:calc(clamp(60px,9vh,100px) + env(safe-area-inset-bottom,0px));
-    max-width:26vw;text-align:right;font-size:clamp(12px,1.25vw,17px);}
-  #texto-dir .titulo-musica{display:block;margin-bottom:.6em;font-size:1.1em;letter-spacing:.08em;opacity:.85;}
+    max-width:30vw;text-align:right;font-style:italic;font-size:clamp(15px,1.5vw,22px);}
+  #texto-dir .titulo-musica{font-style:normal;font-size:.55em;letter-spacing:.3em;text-transform:uppercase;
+    color:#9fb8ff;opacity:.85;margin-bottom:.8em;}
+  .vida,.amo{color:#ff5a6e;text-shadow:0 0 14px rgba(255,70,100,.85);}
+  .minuto{color:#ffd66b;text-shadow:0 0 14px rgba(255,210,100,.7);}
+  .voce{color:#7fb0ff;text-shadow:0 0 14px rgba(110,160,255,.85);}
+  .coracao{display:inline-block;color:#ff5a6e;animation:bate 1.4s ease-in-out infinite;}
+  @keyframes bate{0%,100%{transform:scale(1)}50%{transform:scale(1.28)}}
   @media (max-width:700px){
-    .texto{max-width:42vw !important;font-size:11px !important;line-height:1.5;}
-    #texto-dir{bottom:calc(64px + env(safe-area-inset-bottom,0px));}
+    .texto{max-width:46vw;}
+    #texto-esq{font-size:21px;}
+    #texto-dir{font-size:13px;bottom:calc(64px + env(safe-area-inset-bottom,0px));}
   }
 </style>
 </head>
@@ -35,18 +58,20 @@
 <canvas id="main"></canvas>
 <!-- ============ TEXTO DO CANTO ESQUERDO: escreva o que quiser aqui ============ -->
 <div id="texto-esq" class="texto">
-Princesas também merecem buquês.<br>
-Esse não é de verdade, mas duram por uma <span style="color:#ff0000">vida</span> inteira.
+  <span class="linha ornamento" style="--i:0">✿ &nbsp;♡&nbsp; ✿</span>
+  <span class="linha" style="--i:1">Princesas também merecem buquês.</span>
+  <span class="linha" style="--i:2">Esse não é de verdade, mas duram por uma <span class="vida">vida</span> inteira.</span>
 </div>
 
 <!-- ============ LETRA DA MÚSICA NO CANTO DIREITO: cole a letra aqui ============ -->
 <div id="texto-dir" class="texto">
-  <span class="titulo-musica"><span style="color: #098600">Trevo (Tu)</span> - AnaVitória e Tiago Iorc</span>
-  <span style="color:#ff0000">Tu</span> que tem esse abraço casa<br>
-Se decidir bater asa<br>
-Me leva contigo pra passear<br>
-Eu juro, afeto e paz não vão te faltar<br> 
-...
+  <!-- Para mostrar o nome da música, tire as marcas de comentário da linha abaixo e edite:
+  <span class="linha titulo-musica" style="--i:4">Nome da música — Artista</span> -->
+  <span class="linha" style="--i:5">É como Zezé diz na música: Cada <span class="minuto">Minuto</span></span>
+  <span class="linha" style="--i:6">Eu te <span class="amo">amo</span> muito.</span>
+  <span class="linha" style="--i:7">Sessenta segundos</span>
+  <span class="linha" style="--i:8">Sessenta motivos</span>
+  <span class="linha" style="--i:9">Pra pensar em <span class="voce">você</span> <span class="coracao">❤</span></span>
 </div>
 
 <button id="replay">↻ recomeçar</button>
@@ -289,6 +314,9 @@ function frame(now){
 addEventListener('resize',resize);
 document.getElementById('replay').onclick=start;
 resize();start();requestAnimationFrame(frame);
+</script>
+<script>
+if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js'));}
 </script>
 </body>
 </html>
